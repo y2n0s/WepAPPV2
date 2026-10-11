@@ -50,6 +50,7 @@ body:not(.auth) header,body:not(.auth) .wrap{display:none}
 #login label{display:block;font-size:14px;font-weight:700;margin:10px 0 5px}
 .th{width:48px;height:48px;border-radius:12px;object-fit:cover;flex:none;background:var(--bg)}
 .ph{display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--bd)}
+.nomob #scanBtn,.nomob #pqScan,.nomob #nbScan,.nomob [data-sc]{display:none!important}
 svg.bcs,img.th[src]{cursor:zoom-in}
 #imz{width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:16px;border-radius:0;background:transparent;color:#fff}
 #imz[open]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
@@ -68,7 +69,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
 <div class="tabs"><button id="t1" class="on">فرعي</button><button id="t2">الإدارة</button></div>
 
 <section id="v1">
-  <div class="seg" id="bsub"><button class="btn sm" id="b_cat" type="button">📦 الأصناف</button><button class="btn sm ghost" id="b_mine" type="button">📝 نواقصي <span id="cnt"></span></button></div>
+  <div class="seg" id="bsub"><button class="btn sm" id="b_cat" type="button">📦 الأصناف</button><button class="btn sm ghost" id="b_mine" type="button">📝 نواقصي <span id="cnt"></span></button><button class="btn sm ghost" id="b_oth" type="button">🔔 الفروع <span id="ocnt"></span></button></div>
   <div id="bp_cat">
     <div class="card">
       <div class="row"><input id="q" placeholder="ابحث باسم الصنف أو الباركود" inputmode="search"><button class="btn ic" id="scanBtn" title="مسح باركود">📷</button></div>
@@ -77,6 +78,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
     <div class="seg" id="cats"></div>
     <div id="res"></div><div id="more"></div>
   </div>
+  <div id="bp_oth" class="hide"><div id="oth"></div></div>
   <div id="bp_mine" class="hide">
     <div class="seg"><button class="btn sm" id="m1" type="button">قيد الانتظار</button><button class="btn sm ghost" id="m2" type="button">تم الطلب</button></div>
     <div id="mine"></div>
@@ -95,11 +97,20 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
 <div id="p_br" class="hide"><button class="btn" id="addB" style="width:100%;margin-bottom:10px">＋ فرع جديد</button><div id="blist"></div></div>
 <div id="p_usr" class="hide"><button class="btn" id="addU" style="width:100%;margin-bottom:10px">＋ مستخدم جديد</button><div id="ulist"></div></div>
 </section>
-<footer>تصميم وتطوير: يونس البحر · Younes AL-Bahar · v7</footer>
+<footer>تصميم وتطوير: يونس البحر · Younes AL-Bahar · v10</footer>
 </div>
 
-<div id="login"><div class="card" style="width:min(92vw,380px);padding:22px"><h2 style="margin:0 0 4px;text-align:center">📦 نواقص الفروع</h2><div class="seg" style="margin-top:14px"><button class="btn sm" id="la1" type="button">👤 المستخدمين</button><button class="btn sm ghost" id="la2" type="button">🛡️ الإدارة</button></div><p id="ls" class="mut" style="text-align:center;margin:0 0 6px">دخول موظفي الفروع</p><label>اسم المستخدم</label><input id="lu" autocapitalize="off" autocomplete="username"><label>كلمة المرور</label><input id="lp" type="password" autocomplete="current-password"><div id="le" style="color:#e5484d;font-size:14px;min-height:20px;margin-top:6px"></div><button class="btn" id="lbtn" style="width:100%;margin-top:6px">دخول</button><div class="mut" style="text-align:center;margin-top:14px;font-size:12px">تصميم وتطوير: يونس البحر · Younes AL-Bahar · v7</div></div></div>
+<div id="login"><div class="card" style="width:min(92vw,380px);padding:22px"><h2 style="margin:0 0 4px;text-align:center">📦 نواقص الفروع</h2><div class="seg" style="margin-top:14px"><button class="btn sm" id="la1" type="button">👤 المستخدمين</button><button class="btn sm ghost" id="la2" type="button">🛡️ الإدارة</button></div><p id="ls" class="mut" style="text-align:center;margin:0 0 6px">دخول موظفي الفروع</p><label>اسم المستخدم</label><input id="lu" autocapitalize="off" autocomplete="username"><label>كلمة المرور</label><input id="lp" type="password" autocomplete="current-password"><div id="le" style="color:#e5484d;font-size:14px;min-height:20px;margin-top:6px"></div><button class="btn" id="lbtn" style="width:100%;margin-top:6px">دخول</button><div class="mut" style="text-align:center;margin-top:14px;font-size:12px">تصميم وتطوير: يونس البحر · Younes AL-Bahar · v10</div></div></div>
 <dialog id="ed"><form method="dialog" onsubmit="return false"><h2 id="edt" style="margin:0 0 6px"></h2><div id="edf"></div><div class="row" style="margin-top:14px"><button class="btn" id="edok" style="flex:1">حفظ</button><button class="btn ghost" id="edno">إلغاء</button></div></form></dialog>
+<dialog id="qd"><form method="dialog" onsubmit="return false">
+  <h2 style="margin:0 0 10px">تسجيل نقص</h2>
+  <div class="row" id="qdprod" style="margin-bottom:6px"></div>
+  <div id="qdinfo" class="mut" style="min-height:18px"></div>
+  <label>الكمية المطلوبة</label>
+  <div class="qty" style="justify-content:center;gap:12px"><button type="button" id="qdminus">−</button><input id="qdn" type="number" inputmode="numeric" min="1" value="1" style="width:100px;text-align:center"><button type="button" id="qdplus">+</button></div>
+  <label>ملاحظات (اختياري)</label><textarea id="qdt" rows="2"></textarea>
+  <div class="row" style="margin-top:14px"><button class="btn" id="qdok" style="flex:1">✔ تأكيد</button><button class="btn ghost" id="qdno">إلغاء</button></div>
+</form></dialog>
 <dialog id="dlg"><form method="dialog" onsubmit="return false">
   <h2 style="margin:0 0 6px">منتج جديد</h2>
   <label>اسم المنتج *</label><input id="nn"><div id="dupHint" style="color:#e5484d;font-size:13px;min-height:18px;margin-top:6px"></div>
@@ -148,10 +159,11 @@ async function sync(ops){
   try{const d=await call({action:"data"});if(verifyOps(ops,d))return true}catch(e){if(!S.token)return false}
   toast("تعذر تأكيد الحفظ — تحقق من الاتصال ثم أعد المحاولة");return false;
 }
-async function load(){if(!live||!S.token)return;try{const j=await call({action:"data"});S.catalog=j.catalog.map(p=>({id:String(p.id),name:p.name,barcode:String(p.barcode||""),image:String(p.image||""),added:+p.added||0,new:!!+p.new}));S.reqs=j.reqs.map(r=>({...r,id:String(r.id),pid:String(r.pid),qty:+r.qty}));S.brRows=(j.branches||[]).map(b=>({id:String(b.id),name:String(b.name)}));S.users=j.users||[];if(j.branches&&j.branches.length){BR=j.branches.map(b=>String(b.name)).filter(Boolean);S.br=BR;fillBranches()}S.synced=1;ready=true;save();applyUser();render()}catch(e){}}
+function applyData(j){S.catalog=j.catalog.map(p=>({id:String(p.id),name:p.name,barcode:String(p.barcode||""),image:String(p.image||""),added:+p.added||0,new:!!+p.new}));S.reqs=j.reqs.map(r=>({...r,id:String(r.id),pid:String(r.pid),qty:+r.qty}));S.brRows=(j.branches||[]).map(b=>({id:String(b.id),name:String(b.name)}));S.users=j.users||[];S.others=(j.others||[]).map(x=>({pid:String(x.pid),n:+x.n}));if(j.branches&&j.branches.length){BR=j.branches.map(b=>String(b.name)).filter(Boolean);S.br=BR;fillBranches()}S.synced=1;ready=true;save();applyUser();render()}
+async function load(){if(!live||!S.token)return;try{applyData(await call({action:"data"}))}catch(e){}}
 function showLogin(){const on=live&&S.token&&ready;$("#login").style.display=on?"none":"flex";document.body.classList.toggle("auth",!!on)}
-async function doLogin(){$("#le").textContent="";if(!live){$("#le").textContent="لم يُضبط رابط Apps Script داخل index.html";return}try{const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"login",username:$("#lu").value.trim(),password:$("#lp").value,as:loginAs})});const j=await r.json();if(!j.ok){$("#le").textContent="بيانات الدخول غير صحيحة لهذا القسم";return}S.token=j.token;S.user=j.user;S.catalog=[];S.reqs=[];$("#lp").value="";save();applyUser();await load();if(!ready)$("#le").textContent="تعذر تحميل البيانات، حاول مجدداً"}catch(e){$("#le").textContent="تعذر الاتصال بالخادم"}}
-function logout(expired){ready=false;S.token=null;S.user=null;S.catalog=[];S.reqs=[];save();showLogin();$("#out").style.display="none";$("#who").textContent="";if(expired===true)toast("انتهت الجلسة، سجّل الدخول مجدداً")}
+async function doLogin(){$("#le").textContent="";if(!live){$("#le").textContent="لم يُضبط رابط Apps Script داخل index.html";return}try{const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"login",username:$("#lu").value.trim(),password:$("#lp").value,as:loginAs})});const j=await r.json();if(!j.ok){$("#le").textContent="بيانات الدخول غير صحيحة لهذا القسم";return}S.token=j.token;S.user=j.user;S.catalog=[];S.reqs=[];$("#lp").value="";save();if(j.data)applyData(j.data);else{applyUser();await load()}if(!ready)$("#le").textContent="تعذر تحميل البيانات، حاول مجدداً"}catch(e){$("#le").textContent="تعذر الاتصال بالخادم"}}
+function logout(expired){ready=false;S.token=null;S.user=null;S.catalog=[];S.reqs=[];S.synced=0;save();showLogin();$("#out").style.display="none";$("#who").textContent="";if(expired===true)toast("انتهت الجلسة، سجّل الدخول مجدداً")}
 function applyUser(){showLogin();const u=S.user;if(!live||!u)return;const adm=u.role=="admin";$("#t2").style.display=adm?"":"none";$("#branch").style.display=adm?"":"none";$("#who").textContent=u.name+(adm?" · مدير":" · "+u.branch);$("#out").style.display="";if(!adm){S.branch=u.branch;tab(1)}}
 let flt="open";
 const save=()=>{try{localStorage.setItem("shortage_v1",JSON.stringify(S))}catch(e){}};
@@ -174,11 +186,13 @@ function tab(n){$("#v1").classList.toggle("hide",n!=1);$("#v2").classList.toggle
 $("#f1").onclick=()=>{flt="open";$("#f1").classList.remove("ghost");$("#f2").classList.add("ghost");render()};
 $("#f2").onclick=()=>{flt="ordered";$("#f2").classList.remove("ghost");$("#f1").classList.add("ghost");render()};
 
-function add(p,qty=1,note=""){
+function addLocal(p,qty=1,note="",sug=0){
   let r=S.reqs.find(x=>x.pid==p.id&&x.branch==S.branch&&x.status=="open");
-  if(r)r.qty+=qty;else S.reqs.push({id:"r"+Date.now()+Math.random().toString(36).slice(2,5),pid:p.id,branch:S.branch,qty,status:"open",note,ts:Date.now()});
-  if(!r)r=S.reqs[S.reqs.length-1];sync([{op:"upsertReq",row:r}]);save();render();toast("تمت إضافة: "+p.name);
+  if(r){r.qty+=qty;if(note&&!String(r.note||"").includes(note))r.note=(r.note?r.note+" | ":"")+note}
+  else{r={id:"r"+Date.now()+Math.random().toString(36).slice(2,5),pid:p.id,branch:S.branch,qty,status:"open",note,ts:Date.now(),sug:sug?1:0};S.reqs.push(r)}
+  return r;
 }
+function add(p,qty=1,note="",sug=0){const r=addLocal(p,qty,note,sug);sync([{op:"upsertReq",row:r}]);save();render();toast("تمت إضافة: "+p.name)}
 const prod=id=>S.catalog.find(p=>p.id==id)||{name:"؟",barcode:""};
 
 $("#q").oninput=render;
@@ -194,12 +208,12 @@ function render(){renderMgmt();setTimeout(afterRender,0);
   $("#s3").textContent=new Set(rs.map(r=>r.branch)).size;
   $("#adm").innerHTML=ids.length?ids.map(i=>{const p=prod(i),t=g[i].reduce((a,r)=>a+r.qty,0);
     return `<div class="card"><div class="item">${nameBlk(p,1)}<b style="font-size:22px;color:var(--pri)">${t}</b></div>
-    <div>${g[i].map(r=>`<span class="chip">${esc(r.branch)}: ${r.qty}${r.note?" · "+esc(r.note):""}${r.byname?" · 👤 "+esc(r.byname):""}${flt=="ordered"&&r.ots?" · طُلب "+new Date(+r.ots).toLocaleDateString("ar",{day:"numeric",month:"short"}):""}</span>`).join("")}</div>
+    <div>${g[i].map(r=>`<span class="chip">${esc(r.branch)}: ${r.qty}${r.note?" · "+esc(r.note):""}${r.byname?" · 👤 "+esc(uniqNames(r.byname)):""}${r.sug?" · 💡 من اقتراح الفروع":""}${flt=="ordered"&&r.ots?" · طُلب "+new Date(+r.ots).toLocaleDateString("ar",{day:"numeric",month:"short"}):""}</span>`).join("")}</div>
     <div class="row" style="margin-top:10px">${flt=="open"?`<button class="btn sm" data-ord="${i}">✔ تم الطلب</button>`:`<button class="btn sm ghost" data-reopen="${i}">↩ إعادة</button>`}${p.new?`<button class="btn sm ghost" data-ok="${i}">اعتماد الصنف</button>`:""}</div></div>`}).join(""):'<div class="empty">لا توجد عناصر</div>';
 }
 document.addEventListener("click",e=>{
   const d=e.target.dataset||{};
-  if(d.add){add(prod(d.add));$("#q").value="";render()}
+  if(d.add)openQty(prod(d.add));
   if(d.p){const r=S.reqs.find(r=>r.id==d.p);r.qty++;sync([{op:"upsertReq",row:r}]);save();render()}
   if(d.m){const r=S.reqs.find(r=>r.id==d.m);r.qty--;if(r.qty<1){S.reqs=S.reqs.filter(x=>x!==r);sync([{op:"deleteReq",row:r}])}else sync([{op:"upsertReq",row:r}]);save();render()}
   if(d.ord||d.reopen){const id=d.ord||d.reopen;const ch=[];S.reqs.forEach(r=>{if(r.pid==id&&r.status==(d.ord?"open":"ordered")){r.status=d.ord?"ordered":"open";ch.push({op:"upsertReq",row:r})}});sync(ch).then(load);save();render()}
@@ -210,7 +224,7 @@ document.addEventListener("click",e=>{
 function openNew(code=""){$("#nn").value=$("#q").value&&!/^\d+$/.test($("#q").value)?$("#q").value:"";$("#nb").value=code;$("#nq").value=1;$("#nt").value="";$("#ni").value="";$("#ni_p").style.visibility="hidden";$("#ni_p").removeAttribute("src");dupHint();$("#dlg").showModal()}
 $("#newBtn").onclick=()=>openNew(/^\d{6,}$/.test($("#q").value)?$("#q").value:"");
 $("#nno").onclick=()=>$("#dlg").close();
-$("#nok").onclick=async()=>{
+$("#nok").onclick=()=>{
   const n=$("#nn").value.trim();if(!n){toast("اكتب اسم المنتج");return}
   const im=$("#ni").value.trim();if(!okUrl(im)){toast("رابط الصورة يجب أن يبدأ بـ https://");return}
   const b=$("#nb").value.trim(),qty=Math.max(1,+$("#nq").value||1),note=$("#nt").value.trim();
@@ -219,13 +233,14 @@ $("#nok").onclick=async()=>{
     if(d.type=="similar"){if(confirm(`يوجد صنف مشابه مضاف مسبقاً: «${d.p.name}».\nهل هو نفس الصنف؟\nموافق = تسجيله كنقص، إلغاء = إضافته كصنف جديد`))p=d.p}
     else{if(!confirm(`هذا الصنف مضاف مسبقاً باسم «${d.p.name}».\nسيُسجَّل كنقص بدل إضافته من جديد.`))return;p=d.p}
   }
-  if(!p){
-    p={id:"n"+Date.now(),name:n,barcode:b,new:true,image:im,added:0};
-    S.catalog.push(p);
-    if(!await sync([{op:"upsertProd",row:p}])){S.catalog=S.catalog.filter(x=>x!==p);render();return}
-  }
-  add(p,qty,note);
-  $("#dlg").close();$("#q").value="";render();
+  $("#dlg").close();$("#q").value="";
+  if(p){add(p,qty,note);return}
+  // صنف جديد: يظهر فوراً، ويُحفظ الصنف والطلب معاً في طلب واحد للخادم
+  p={id:"n"+Date.now(),name:n,barcode:b,new:true,image:im,added:0};
+  S.catalog.push(p);
+  const r=addLocal(p,qty,note);
+  save();render();toast("تمت إضافة: "+p.name);
+  sync([{op:"upsertProd",row:p},{op:"upsertReq",row:r}]).then(ok=>{if(!ok){S.catalog=S.catalog.filter(x=>x!==p);S.reqs=S.reqs.filter(x=>x!==r);save();render()}});
 };
 
 // barcode scan (camera or manual) — used everywhere a barcode is needed
@@ -255,7 +270,7 @@ $("#sx").onclick=()=>scanFin&&scanFin(null);
 $("#sok").onclick=()=>{const v=$("#sman").value.trim();if(v&&scanFin)scanFin(v)};
 $("#sman").onkeydown=e=>{if(e.key=="Enter")$("#sok").click()};
 async function scanInto(inp,dlg){const d=$(dlg);d.close();const c=await scanCode();d.showModal();if(c){$(inp).value=c;if(inp=="#nb")dupHint()}}
-$("#scanBtn").onclick=async()=>{const code=await scanCode();if(!code)return;const p=S.catalog.find(x=>x.barcode==code);if(p){add(p);$("#q").value="";render()}else{toast("منتج غير مسجل — أدخل بياناته");openNew(code)}};
+$("#scanBtn").onclick=async()=>{const code=await scanCode();if(!code)return;const p=S.catalog.find(x=>x.barcode==code);if(p){openQty(p)}else{toast("منتج غير مسجل — أدخل بياناته");openNew(code)}};
 $("#pqScan").onclick=async()=>{const c=await scanCode();if(c){$("#pq").value=c;renderMgmt()}};
 $("#nbScan").onclick=()=>scanInto("#nb","#dlg");
 
@@ -386,13 +401,14 @@ document.addEventListener("click",e=>{const sv=e.target.closest&&e.target.closes
 
 // duplicate check for customer-requested products
 const norm=t=>String(t||"").toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").replace(/[^\p{L}\p{N}\s]/gu," ").replace(/\s+/g," ").trim();
+const _nc=new Map();const nrm=t=>{let v=_nc.get(t);if(v===undefined){v=norm(t);_nc.set(t,v)}return v};
 function findDup(name,barcode){
   const bc=String(barcode||"").trim(),n=norm(name);
   if(bc){const p=S.catalog.find(x=>x.barcode==bc);if(p)return{p,type:"barcode"}}
   if(!n)return null;
-  const ex=S.catalog.find(x=>norm(x.name)==n);if(ex)return{p:ex,type:"name"};
+  const ex=S.catalog.find(x=>nrm(x.name)==n);if(ex)return{p:ex,type:"name"};
   const t=new Set(n.split(" ").filter(w=>w.length>1));let best=null,bs=0;
-  S.catalog.forEach(x=>{const xn=norm(x.name);if(!xn)return;
+  S.catalog.forEach(x=>{const xn=nrm(x.name);if(!xn)return;
     if(n.length>=4&&xn.length>=4&&(xn.includes(n)||n.includes(xn))){if(bs<1){best=x;bs=1}return}
     const u=new Set(xn.split(" ").filter(w=>w.length>1));if(!u.size||!t.size)return;
     let c=0;t.forEach(w=>{if(u.has(w))c++});const sc=c/Math.max(t.size,u.size);if(sc>bs){bs=sc;best=x}});
@@ -404,12 +420,20 @@ $("#nn").oninput=dupHint;$("#nb").oninput=dupHint;
 
 // branch view: browse items, new-items category (15 days), follow my shortages
 let bsub="cat",cat="all",mflt="open",shown=40;
-function setBsub(x){bsub=x;$("#bp_cat").classList.toggle("hide",x!="cat");$("#bp_mine").classList.toggle("hide",x!="mine");$("#b_cat").classList.toggle("ghost",x!="cat");$("#b_mine").classList.toggle("ghost",x!="mine");render()}
-$("#b_cat").onclick=()=>setBsub("cat");$("#b_mine").onclick=()=>setBsub("mine");
+function setBsub(x){bsub=x;[["cat","bp_cat","b_cat"],["mine","bp_mine","b_mine"],["oth","bp_oth","b_oth"]].forEach(([k,p,bt])=>{$("#"+p).classList.toggle("hide",x!=k);$("#"+bt).classList.toggle("ghost",x!=k)});render()}
+$("#b_cat").onclick=()=>setBsub("cat");$("#b_mine").onclick=()=>setBsub("mine");$("#b_oth").onclick=()=>setBsub("oth");
 $("#m1").onclick=()=>{mflt="open";render()};$("#m2").onclick=()=>{mflt="ordered";render()};
 $("#q").oninput=()=>{shown=40;render()};
 document.addEventListener("click",e=>{const d=e.target.dataset||{};if(d.cat){cat=d.cat;shown=40;render()}if(d.more){shown+=40;render()}});
+function renderOthers(){
+  const mineOpen=new Set(S.reqs.filter(r=>r.branch==S.branch&&r.status=="open").map(r=>String(r.pid)));
+  const list=(S.others||[]).filter(o=>!mineOpen.has(o.pid)&&S.catalog.some(p=>p.id==o.pid)).sort((a,b)=>b.n-a.n);
+  $("#ocnt").textContent=list.length?`(${list.length})`:"";
+  $("#oth").innerHTML=(list.length?'<div class="mut" style="margin:0 4px 8px">أصناف طلبتها فروع أخرى ولم تسجّلها في فرعك — راجعها لعلك نسيت شيئاً</div>':"")+(list.length?list.map(o=>{const p=prod(o.pid);return `<div class="card item">${nameBlk(p)}<div style="text-align:center"><div class="mut" style="font-size:12px;margin-bottom:4px">طلبه ${o.n} ${o.n==1?"فرع":"فروع"}</div><button class="btn sm" data-sug="${esc(o.pid)}">+ أحتاجه أيضاً</button></div></div>`}).join(""):'<div class="empty">لا توجد طلبات من الفروع الأخرى حالياً 👌</div>');
+}
+document.addEventListener("click",e=>{const d=e.target.dataset||{};if(d.sug)add(prod(d.sug),1,"",1)});
 function renderBranch(){
+  renderOthers();
   const q=$("#q").value.trim().toLowerCase();
   const fresh=S.catalog.filter(isFresh).sort((a,b)=>b.added-a.added);
   $("#cats").innerHTML=`<button class="btn sm${cat=="all"?"":" ghost"}" data-cat="all">الكل (${S.catalog.length})</button><button class="btn sm${cat=="new"?"":" ghost"}" data-cat="new">🆕 أصناف جديدة (${fresh.length})</button>`;
@@ -437,7 +461,32 @@ document.addEventListener("click",e=>{
   $("#imzi").src=src;$("#imzn").textContent=p?p.name:"";$("#imz").showModal();
 });
 $("#imz").onclick=()=>$("#imz").close();
+
+// phones only: camera scanning; elsewhere manual entry only
+const isMobile=/Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
+if(!isMobile)document.documentElement.classList.add("nomob");
+const uniqNames=t=>[...new Set(String(t||"").split("،").map(x=>x.trim()).filter(Boolean))].join("، ");
+
+// quantity dialog: shown after scanning / entering a barcode / tapping "+ ناقص"
+let qdProd=null;
+function openQty(p){
+  qdProd=p;
+  $("#qdprod").innerHTML=`${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b><span class="mut" dir="ltr" style="display:block;unicode-bidi:plaintext">${esc(p.barcode)||"بدون باركود"}</span></div>`;
+  const o=S.reqs.find(r=>r.pid==p.id&&r.branch==S.branch&&r.status=="open");
+  $("#qdinfo").textContent=o?`مسجّل مسبقاً في فرعك ×${o.qty} — ستُضاف الكمية الجديدة إليه`:"";
+  $("#qdn").value=1;$("#qdt").value="";$("#qd").showModal();
+  setTimeout(()=>{$("#qdn").focus();$("#qdn").select()},50);
+}
+$("#qdminus").onclick=()=>{const n=$("#qdn");n.value=Math.max(1,(+n.value||1)-1)};
+$("#qdplus").onclick=()=>{const n=$("#qdn");n.value=(+n.value||0)+1};
+$("#qdno").onclick=()=>$("#qd").close();
+$("#qdok").onclick=()=>{const n=Math.max(1,Math.floor(+$("#qdn").value||1));add(qdProd,n,$("#qdt").value.trim());$("#qd").close();$("#q").value="";render()};
+$("#qdn").onkeydown=e=>{if(e.key=="Enter")$("#qdok").click()};
+$("#q").onkeydown=e=>{if(e.key!="Enter")return;const v=$("#q").value.trim();if(!v)return;
+  const p=S.catalog.find(x=>x.barcode==v);
+  if(p)openQty(p);else if(/^\d{6,}$/.test(v)){toast("منتج غير مسجل — أدخل بياناته");openNew(v)}};
 $("#lbtn").onclick=doLogin;$("#lp").onkeydown=e=>{if(e.key=="Enter")doLogin()};
+if(live&&S.token&&S.user&&S.synced)ready=true;
 render();applyUser();load();setInterval(()=>{if(!document.hidden&&!$("#dlg").open)load()},20000);
 </script>
 </body>
