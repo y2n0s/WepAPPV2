@@ -72,7 +72,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
   <div class="seg" id="bsub"><button class="btn sm" id="b_cat" type="button">📦 الأصناف</button><button class="btn sm ghost" id="b_mine" type="button">📝 نواقصي <span id="cnt"></span></button><button class="btn sm ghost" id="b_oth" type="button">🔔 الفروع <span id="ocnt"></span></button></div>
   <div id="bp_cat">
     <div class="card">
-      <div class="row"><input id="q" placeholder="ابحث باسم الصنف أو الباركود" inputmode="search"><button class="btn ic" id="scanBtn" title="مسح باركود">📷</button></div>
+      <div class="row"><input id="q" placeholder="ابحث بالاسم أو الباركود أو رقم الصنف" inputmode="search"><button class="btn ic" id="scanBtn" title="مسح باركود">📷</button></div>
       <button class="btn ghost" id="newBtn" style="width:100%;margin-top:10px">➕ منتج جديد يطلبه العملاء</button>
     </div>
     <div class="seg" id="cats"></div>
@@ -93,14 +93,14 @@ footer{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
   <select id="fb"></select>
   <div id="adm" style="margin-top:12px"></div>
 </div>
-<div id="p_prod" class="hide"><div class="row" style="margin-bottom:10px"><button class="btn ghost" id="xpo" style="flex:1" type="button">⬇️ تصدير Excel</button><button class="btn ghost" id="xpi" style="flex:1" type="button">⬆️ استيراد Excel</button></div><input type="file" id="xlsIn" accept=".xlsx,.xls,.csv" class="hide"><div class="row" style="margin-bottom:10px"><input id="pq" placeholder="بحث بالاسم أو الباركود"><button class="btn ic" id="pqScan" type="button">📷</button><button class="btn" id="addP" style="white-space:nowrap">＋ منتج</button></div><div id="plist"></div></div>
+<div id="p_prod" class="hide"><div class="row" style="margin-bottom:10px"><button class="btn ghost" id="xpo" style="flex:1" type="button">⬇️ تصدير Excel</button><button class="btn ghost" id="xpi" style="flex:1" type="button">⬆️ استيراد Excel</button></div><input type="file" id="xlsIn" accept=".xlsx,.xls,.csv" class="hide"><div class="row" style="margin-bottom:10px"><input id="pq" placeholder="بحث بالاسم أو الباركود أو رقم الصنف"><button class="btn ic" id="pqScan" type="button">📷</button><button class="btn" id="addP" style="white-space:nowrap">＋ منتج</button></div><div id="plist"></div></div>
 <div id="p_br" class="hide"><button class="btn" id="addB" style="width:100%;margin-bottom:10px">＋ فرع جديد</button><div id="blist"></div></div>
 <div id="p_usr" class="hide"><button class="btn" id="addU" style="width:100%;margin-bottom:10px">＋ مستخدم جديد</button><div id="ulist"></div></div>
 </section>
-<footer>تصميم وتطوير: يونس البحر · Younes AL-Bahar · v10</footer>
+<footer>تصميم وتطوير: يونس البحر · Younes AL-Bahar · v11</footer>
 </div>
 
-<div id="login"><div class="card" style="width:min(92vw,380px);padding:22px"><h2 style="margin:0 0 4px;text-align:center">📦 نواقص الفروع</h2><div class="seg" style="margin-top:14px"><button class="btn sm" id="la1" type="button">👤 المستخدمين</button><button class="btn sm ghost" id="la2" type="button">🛡️ الإدارة</button></div><p id="ls" class="mut" style="text-align:center;margin:0 0 6px">دخول موظفي الفروع</p><label>اسم المستخدم</label><input id="lu" autocapitalize="off" autocomplete="username"><label>كلمة المرور</label><input id="lp" type="password" autocomplete="current-password"><div id="le" style="color:#e5484d;font-size:14px;min-height:20px;margin-top:6px"></div><button class="btn" id="lbtn" style="width:100%;margin-top:6px">دخول</button><div class="mut" style="text-align:center;margin-top:14px;font-size:12px">تصميم وتطوير: يونس البحر · Younes AL-Bahar · v10</div></div></div>
+<div id="login"><div class="card" style="width:min(92vw,380px);padding:22px"><h2 style="margin:0 0 4px;text-align:center">📦 نواقص الفروع</h2><div class="seg" style="margin-top:14px"><button class="btn sm" id="la1" type="button">👤 المستخدمين</button><button class="btn sm ghost" id="la2" type="button">🛡️ الإدارة</button></div><p id="ls" class="mut" style="text-align:center;margin:0 0 6px">دخول موظفي الفروع</p><label>اسم المستخدم</label><input id="lu" autocapitalize="off" autocomplete="username"><label>كلمة المرور</label><input id="lp" type="password" autocomplete="current-password"><div id="le" style="color:#e5484d;font-size:14px;min-height:20px;margin-top:6px"></div><button class="btn" id="lbtn" style="width:100%;margin-top:6px">دخول</button><div class="mut" style="text-align:center;margin-top:14px;font-size:12px">تصميم وتطوير: يونس البحر · Younes AL-Bahar · v11</div></div></div>
 <dialog id="ed"><form method="dialog" onsubmit="return false"><h2 id="edt" style="margin:0 0 6px"></h2><div id="edf"></div><div class="row" style="margin-top:14px"><button class="btn" id="edok" style="flex:1">حفظ</button><button class="btn ghost" id="edno">إلغاء</button></div></form></dialog>
 <dialog id="qd"><form method="dialog" onsubmit="return false">
   <h2 style="margin:0 0 10px">تسجيل نقص</h2>
@@ -159,7 +159,7 @@ async function sync(ops){
   try{const d=await call({action:"data"});if(verifyOps(ops,d))return true}catch(e){if(!S.token)return false}
   toast("تعذر تأكيد الحفظ — تحقق من الاتصال ثم أعد المحاولة");return false;
 }
-function applyData(j){S.catalog=j.catalog.map(p=>({id:String(p.id),name:p.name,barcode:String(p.barcode||""),image:String(p.image||""),added:+p.added||0,new:!!+p.new}));S.reqs=j.reqs.map(r=>({...r,id:String(r.id),pid:String(r.pid),qty:+r.qty}));S.brRows=(j.branches||[]).map(b=>({id:String(b.id),name:String(b.name)}));S.users=j.users||[];S.others=(j.others||[]).map(x=>({pid:String(x.pid),n:+x.n}));if(j.branches&&j.branches.length){BR=j.branches.map(b=>String(b.name)).filter(Boolean);S.br=BR;fillBranches()}S.synced=1;ready=true;save();applyUser();render()}
+function applyData(j){S.catalog=j.catalog.map(p=>({id:String(p.id),name:p.name,barcode:String(p.barcode||""),sku:String(p.sku||""),image:String(p.image||""),added:+p.added||0,new:!!+p.new}));S.reqs=j.reqs.map(r=>({...r,id:String(r.id),pid:String(r.pid),qty:+r.qty}));S.brRows=(j.branches||[]).map(b=>({id:String(b.id),name:String(b.name)}));S.users=j.users||[];S.others=(j.others||[]).map(x=>({pid:String(x.pid),n:+x.n}));if(j.branches&&j.branches.length){BR=j.branches.map(b=>String(b.name)).filter(Boolean);S.br=BR;fillBranches()}S.synced=1;ready=true;save();applyUser();render()}
 async function load(){if(!live||!S.token)return;try{applyData(await call({action:"data"}))}catch(e){}}
 function showLogin(){const on=live&&S.token&&ready;$("#login").style.display=on?"none":"flex";document.body.classList.toggle("auth",!!on)}
 async function doLogin(){$("#le").textContent="";if(!live){$("#le").textContent="لم يُضبط رابط Apps Script داخل index.html";return}try{const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"login",username:$("#lu").value.trim(),password:$("#lp").value,as:loginAs})});const j=await r.json();if(!j.ok){$("#le").textContent="بيانات الدخول غير صحيحة لهذا القسم";return}S.token=j.token;S.user=j.user;S.catalog=[];S.reqs=[];$("#lp").value="";save();if(j.data)applyData(j.data);else{applyUser();await load()}if(!ready)$("#le").textContent="تعذر تحميل البيانات، حاول مجدداً"}catch(e){$("#le").textContent="تعذر الاتصال بالخادم"}}
@@ -280,7 +280,8 @@ const FRESH_DAYS=15,DAY=864e5;
 const isFresh=p=>!p.new&&p.added&&Date.now()-p.added<FRESH_DAYS*DAY;
 const daysLeft=p=>Math.max(1,Math.ceil((p.added+FRESH_DAYS*DAY-Date.now())/DAY));
 const tagOf=p=>p.new?'<span class="tag">بانتظار الاعتماد</span>':isFresh(p)?'<span class="tag" style="background:rgba(18,163,107,.15);color:var(--ok)">🆕 جديد</span>':'';
-const nameBlk=(p,r)=>`<div class="row" style="min-width:0">${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b>${r?bcView(p):`<span class="mut">${esc(p.barcode)||"بدون باركود"}</span>`}</div></div>`;
+const skuLine=p=>p.sku?`<span class="mut" style="display:block">رقم الصنف: ${esc(p.sku)}</span>`:"";
+const nameBlk=(p,r)=>`<div class="row" style="min-width:0">${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b>${skuLine(p)}${r?bcView(p):`<span class="mut">${esc(p.barcode)||"بدون باركود"}</span>`}</div></div>`;
 const okUrl=u=>!u||/^https?:\/\//i.test(u);
 function prevImg(id){const v=$("#"+id).value.trim(),im=$("#"+id+"_p");if(v){im.onerror=()=>im.style.visibility="hidden";im.onload=()=>im.style.visibility="visible";im.src=v}else{im.removeAttribute("src");im.style.visibility="hidden"}}
 const imgPicker=(id,v)=>`<div class="row" style="margin:6px 0"><img class="th" id="${id}_p" ${v?`src="${esc(v)}"`:'style="visibility:hidden"'} onerror="this.style.visibility='hidden'"><input id="${id}" type="url" inputmode="url" dir="ltr" placeholder="https://example.com/image.jpg" value="${esc(v||"")}" oninput="prevImg('${id}')" autocomplete="off"></div>`;
@@ -305,8 +306,8 @@ function editor(title,fields,vals,save){
 $("#edno").onclick=()=>$("#ed").close();
 const adminSave=async ops=>{const ok=await sync(ops);await load();return ok};
 function editProd(id){const p=id?prod(id):{};
-  editor(id?"تعديل منتج":"منتج جديد",[{k:"name",l:"اسم المنتج *"},{k:"barcode",l:"الباركود",scan:true,ph:"اكتبه أو امسحه بالكاميرا"},{k:"image",l:"صورة المنتج",t:"image"},{k:"st",l:"الحالة",t:"select",o:[["0","معتمد"],["1","جديد (بانتظار الاعتماد)"]]}],{name:p.name,barcode:p.barcode,image:p.image,st:p.new?"1":"0"},
-  async o=>{if(!o.name){toast("اكتب اسم المنتج");return false}if(!okUrl(o.image)){toast("رابط الصورة يجب أن يبدأ بـ https://");return false}return adminSave([{op:"upsertProd",row:{id:id||"p"+Date.now(),name:o.name,barcode:o.barcode,image:o.image,new:o.st=="1"}}])})}
+  editor(id?"تعديل منتج":"منتج جديد",[{k:"sku",l:"رقم الصنف"},{k:"name",l:"اسم المنتج *"},{k:"barcode",l:"الباركود",scan:true,ph:"اكتبه أو امسحه بالكاميرا"},{k:"image",l:"صورة المنتج",t:"image"},{k:"st",l:"الحالة",t:"select",o:[["0","معتمد"],["1","جديد (بانتظار الاعتماد)"]]}],{sku:p.sku,name:p.name,barcode:p.barcode,image:p.image,st:p.new?"1":"0"},
+  async o=>{if(!o.name){toast("اكتب اسم المنتج");return false}if(!okUrl(o.image)){toast("رابط الصورة يجب أن يبدأ بـ https://");return false}return adminSave([{op:"upsertProd",row:{id:id||"p"+Date.now(),sku:o.sku,name:o.name,barcode:o.barcode,image:o.image,new:o.st=="1"}}])})}
 function editBr(id){const b=(S.brRows||[]).find(x=>x.id==id)||{};
   editor(id?"تعديل فرع":"فرع جديد",[{k:"name",l:"اسم الفرع *"}],b,
   async o=>{if(!o.name){toast("اكتب اسم الفرع");return false}return adminSave([{op:"upsertBranch",row:{id:id||"b"+Date.now(),name:o.name}}])})}
@@ -321,7 +322,7 @@ function editUsr(un){const u=(S.users||[]).find(x=>x.username==un)||{};
   async o=>{if(!o.username){toast("اكتب اسم المستخدم");return false}if(!un&&!o.password){toast("أدخل كلمة المرور");return false}return adminSave([{op:"upsertUser",row:o}])})}
 function renderMgmt(){
   const pq=($("#pq").value||"").trim().toLowerCase();
-  const ps=S.catalog.filter(p=>!pq||p.name.toLowerCase().includes(pq)||p.barcode.includes(pq)).slice(0,100);
+  const ps=S.catalog.filter(p=>!pq||p.name.toLowerCase().includes(pq)||p.barcode.includes(pq)||String(p.sku||"").toLowerCase().includes(pq)).slice(0,100);
   const act=(a,id)=>`<div class="row"><button class="btn sm ghost" data-e${a}="${esc(id)}">✏️</button><button class="btn sm ghost" data-d${a}="${esc(id)}">🗑️</button></div>`;
   $("#plist").innerHTML=ps.length?ps.map(p=>`<div class="card item">${nameBlk(p)}${act("p",p.id)}</div>`).join(""):'<div class="empty">لا توجد منتجات</div>';
   $("#blist").innerHTML=(S.brRows||[]).length?S.brRows.map(b=>`<div class="card item"><b>${esc(b.name)}</b>${act("b",b.id)}</div>`).join(""):'<div class="empty">لا توجد فروع</div>';
@@ -352,13 +353,13 @@ async function afterRender(){
 // Excel import / export of products (admin)
 async function exportProd(){
   try{await loadXLSX()}catch(e){toast("تعذر تحميل مكتبة Excel");return}
-  const rows=S.catalog.map(p=>({"اسم المنتج":p.name,"الباركود":p.barcode,"رابط الصورة":p.image,"الحالة":p.new?"جديد":"معتمد"}));
-  const ws=XLSX.utils.json_to_sheet(rows.length?rows:[{"اسم المنتج":"","الباركود":"","رابط الصورة":"","الحالة":""}]);
-  ws["!cols"]=[{wch:38},{wch:18},{wch:44},{wch:10}];
+  const rows=S.catalog.map(p=>({"رقم الصنف":p.sku,"اسم المنتج":p.name,"الباركود":p.barcode,"رابط الصورة":p.image,"الحالة":p.new?"جديد":"معتمد"}));
+  const ws=XLSX.utils.json_to_sheet(rows.length?rows:[{"رقم الصنف":"","اسم المنتج":"","الباركود":"","رابط الصورة":"","الحالة":""}]);
+  ws["!cols"]=[{wch:14},{wch:38},{wch:18},{wch:44},{wch:10}];
   const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"المنتجات");wb.Workbook={Views:[{RTL:true}]};
   XLSX.writeFile(wb,"products-"+new Date().toISOString().slice(0,10)+".xlsx");
 }
-const HDR={name:["اسم المنتج","الاسم","اسم الصنف","المنتج","name","product","product name"],barcode:["الباركود","باركود","barcode","code"],image:["رابط الصورة","الصورة","image","image url","img"],st:["الحالة","status"]};
+const HDR={sku:["رقم الصنف","رقم المنتج","كود الصنف","رقم","sku","item no","item number","item code"],name:["اسم المنتج","الاسم","اسم الصنف","المنتج","name","product","product name"],barcode:["الباركود","باركود","barcode","code"],image:["رابط الصورة","الصورة","image","image url","img"],st:["الحالة","status"]};
 const pickCol=(row,keys)=>{for(const k of Object.keys(row)){if(keys.includes(String(k).trim().toLowerCase()))return row[k]}return undefined};
 async function importProd(file){
   try{await loadXLSX()}catch(e){toast("تعذر تحميل مكتبة Excel");return}
@@ -368,13 +369,14 @@ async function importProd(file){
   rows.forEach(r=>{
     const name=String(pickCol(r,HDR.name)??"").trim();if(!name){bad++;return}
     const it={name},bc=pickCol(r,HDR.barcode),im=pickCol(r,HDR.image),st=pickCol(r,HDR.st);
+    const sk=pickCol(r,HDR.sku);if(sk!==undefined&&String(sk).trim()!=="")it.sku=String(sk).trim();
     if(bc!==undefined&&String(bc).trim()!=="")it.barcode=String(bc).trim();
     if(im!==undefined){const u=String(im).trim();if(u){if(okUrl(u))it.image=u;else bad++}}
     if(st!==undefined&&String(st).trim()!=="")it.new=/جديد|new|true|1/i.test(String(st));
     items.push(it);
   });
   if(!items.length){toast("لا توجد صفوف صالحة — تأكد من وجود عمود «اسم المنتج»");return}
-  if(!confirm(`استيراد ${items.length} منتج؟\nالمنتج الموجود بنفس الباركود (أو الاسم) يُحدَّث، وغيره يُضاف.`+(bad?`\nسيتم تجاهل ${bad} صف أو قيمة غير صالحة.`:"")))return;
+  if(!confirm(`استيراد ${items.length} منتج؟\nالمنتج الموجود بنفس رقم الصنف أو الباركود (أو الاسم) يُحدَّث، وغيره يُضاف.`+(bad?`\nسيتم تجاهل ${bad} صف أو قيمة غير صالحة.`:"")))return;
   const fresh=confirm("هل تريد إظهار الأصناف المضافة في قسم «🆕 أصناف جديدة» للفروع لمدة 15 يوماً؟\nموافق = نعم، إلغاء = لا");toast("جارٍ الاستيراد…");
   try{
     let add=0,upd=0;
@@ -438,7 +440,7 @@ function renderBranch(){
   const fresh=S.catalog.filter(isFresh).sort((a,b)=>b.added-a.added);
   $("#cats").innerHTML=`<button class="btn sm${cat=="all"?"":" ghost"}" data-cat="all">الكل (${S.catalog.length})</button><button class="btn sm${cat=="new"?"":" ghost"}" data-cat="new">🆕 أصناف جديدة (${fresh.length})</button>`;
   let list=cat=="new"?fresh:S.catalog;
-  if(q)list=list.filter(p=>p.name.toLowerCase().includes(q)||p.barcode.includes(q));
+  if(q)list=list.filter(p=>p.name.toLowerCase().includes(q)||p.barcode.includes(q)||String(p.sku||"").toLowerCase().includes(q));
   const mine=S.reqs.filter(r=>r.branch==S.branch);
   const rows=list.slice(0,shown).map(p=>{const o=mine.find(r=>r.pid==p.id&&r.status=="open");
     return `<div class="item" style="padding:10px 2px;border-top:1px solid var(--bd)">${nameBlk(p)}<div style="text-align:center">${cat=="new"?`<div class="mut" style="font-size:12px">متبقي ${daysLeft(p)} يوم</div>`:""}${o?`<div class="mut" style="font-size:12px">مسجّل ×${o.qty}</div>`:""}<button class="btn sm" data-add="${esc(p.id)}">+ ناقص</button></div></div>`}).join("");
@@ -450,7 +452,7 @@ function renderBranch(){
   $("#m1").classList.toggle("ghost",mflt!="open");$("#m2").classList.toggle("ghost",mflt!="ordered");
   const lst=(mflt=="open"?open:ord).slice().sort((a,b)=>b.ts-a.ts);
   $("#mine").innerHTML=(mflt=="ordered"&&lst.length?'<div class="mut" style="margin:0 4px 8px">تُحذف الطلبات المنفذة من سجلك بعد 7 أيام من تنفيذها</div>':"")+(lst.length?lst.map(r=>{const p=prod(r.pid),dt=new Date(+r.ts).toLocaleDateString("ar",{day:"numeric",month:"short"});
-    return `<div class="card item"><div class="row" style="min-width:0">${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b>${bcView(p)}<span class="mut">${esc(r.note)}</span><span class="mut" style="display:block">سُجّل ${dt}${mflt=="ordered"&&r.ots?" · طُلب "+new Date(+r.ots).toLocaleDateString("ar",{day:"numeric",month:"short"}):""}</span></div></div>${mflt=="open"?`<div class="qty"><button data-m="${r.id}">−</button><b>${r.qty}</b><button data-p="${r.id}">+</button></div>`:`<div style="text-align:center"><b>×${r.qty}</b><div><span class="tag" style="background:rgba(18,163,107,.15);color:var(--ok)">✓ تم الطلب</span></div></div>`}</div>`}).join(""):`<div class="empty">${mflt=="open"?"🎉 لا توجد نواقص قيد الانتظار":"لا توجد طلبات منفذة — تُحذف من سجلك بعد أسبوع من تنفيذها"}</div>`);
+    return `<div class="card item"><div class="row" style="min-width:0">${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b>${skuLine(p)}${bcView(p)}<span class="mut">${esc(r.note)}</span><span class="mut" style="display:block">سُجّل ${dt}${mflt=="ordered"&&r.ots?" · طُلب "+new Date(+r.ots).toLocaleDateString("ar",{day:"numeric",month:"short"}):""}</span></div></div>${mflt=="open"?`<div class="qty"><button data-m="${r.id}">−</button><b>${r.qty}</b><button data-p="${r.id}">+</button></div>`:`<div style="text-align:center"><b>×${r.qty}</b><div><span class="tag" style="background:rgba(18,163,107,.15);color:var(--ok)">✓ تم الطلب</span></div></div>`}</div>`}).join(""):`<div class="empty">${mflt=="open"?"🎉 لا توجد نواقص قيد الانتظار":"لا توجد طلبات منفذة — تُحذف من سجلك بعد أسبوع من تنفيذها"}</div>`);
 }
 
 // tap a product image to enlarge it (works in user, admin and edit screens)
@@ -471,7 +473,7 @@ const uniqNames=t=>[...new Set(String(t||"").split("،").map(x=>x.trim()).filter
 let qdProd=null;
 function openQty(p){
   qdProd=p;
-  $("#qdprod").innerHTML=`${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b><span class="mut" dir="ltr" style="display:block;unicode-bidi:plaintext">${esc(p.barcode)||"بدون باركود"}</span></div>`;
+  $("#qdprod").innerHTML=`${th(p)}<div><b>${esc(p.name)}${tagOf(p)}</b>${skuLine(p)}<span class="mut" dir="ltr" style="display:block;unicode-bidi:plaintext">${esc(p.barcode)||"بدون باركود"}</span></div>`;
   const o=S.reqs.find(r=>r.pid==p.id&&r.branch==S.branch&&r.status=="open");
   $("#qdinfo").textContent=o?`مسجّل مسبقاً في فرعك ×${o.qty} — ستُضاف الكمية الجديدة إليه`:"";
   $("#qdn").value=1;$("#qdt").value="";$("#qd").showModal();
@@ -483,7 +485,7 @@ $("#qdno").onclick=()=>$("#qd").close();
 $("#qdok").onclick=()=>{const n=Math.max(1,Math.floor(+$("#qdn").value||1));add(qdProd,n,$("#qdt").value.trim());$("#qd").close();$("#q").value="";render()};
 $("#qdn").onkeydown=e=>{if(e.key=="Enter")$("#qdok").click()};
 $("#q").onkeydown=e=>{if(e.key!="Enter")return;const v=$("#q").value.trim();if(!v)return;
-  const p=S.catalog.find(x=>x.barcode==v);
+  const p=S.catalog.find(x=>x.barcode==v||(x.sku&&x.sku==v));
   if(p)openQty(p);else if(/^\d{6,}$/.test(v)){toast("منتج غير مسجل — أدخل بياناته");openNew(v)}};
 $("#lbtn").onclick=doLogin;$("#lp").onkeydown=e=>{if(e.key=="Enter")doLogin()};
 if(live&&S.token&&S.user&&S.synced)ready=true;
